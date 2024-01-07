@@ -42,22 +42,30 @@
     
     <div id="button-container">
         <button id="si-btn" onclick="showResponse('Cuando quieras mi chula')">Sí</button>
-        <button id="no-btn" onmouseover="moveNoButton()">No</button>
+        <button id="no-btn" onmouseover="moveNoButton()" onmouseout="resetNoButton()">No</button>
     </div>
 
     <p id="response-text"></p>
 
     <script>
+        var noButtonInterval;
+
         function moveNoButton() {
-            var noButton = document.getElementById('no-btn');
-            var maxX = window.innerWidth - noButton.clientWidth;
-            var maxY = window.innerHeight - noButton.clientHeight;
+            noButtonInterval = setInterval(function() {
+                var noButton = document.getElementById('no-btn');
+                var maxX = window.innerWidth - noButton.clientWidth;
+                var maxY = window.innerHeight - noButton.clientHeight;
 
-            var newX = Math.max(0, Math.min(maxX, Math.floor(Math.random() * maxX)));
-            var newY = Math.max(0, Math.min(maxY, Math.floor(Math.random() * maxY)));
+                var newX = Math.floor(Math.random() * maxX);
+                var newY = Math.floor(Math.random() * maxY);
 
-            noButton.style.left = newX + 'px';
-            noButton.style.top = newY + 'px';
+                noButton.style.left = newX + 'px';
+                noButton.style.top = newY + 'px';
+            }, 100);
+        }
+
+        function resetNoButton() {
+            clearInterval(noButtonInterval);
         }
 
         function showResponse(response) {
@@ -65,6 +73,7 @@
             document.getElementById('response-text').style.display = 'block';
             document.getElementById('si-btn').disabled = true;
             document.getElementById('no-btn').disabled = true;
+            resetNoButton(); // Detener la animación cuando se muestra la respuesta
         }
     </script>
 </body>
