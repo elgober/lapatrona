@@ -42,22 +42,29 @@
     
     <div id="button-container">
         <button id="si-btn" onclick="showResponse('Cuando quieras mi chula')">Sí</button>
-        <button id="no-btn" onmousemove="moveNoButton(event)">No</button>
+        <button id="no-btn" onmouseover="startMoveNoButton()" onmouseout="stopMoveNoButton()">No</button>
     </div>
 
     <p id="response-text"></p>
 
     <script>
-        function moveNoButton(event) {
+        var moveNoButtonInterval;
+
+        function startMoveNoButton() {
+            moveNoButtonInterval = setInterval(moveNoButton, 100);
+        }
+
+        function stopMoveNoButton() {
+            clearInterval(moveNoButtonInterval);
+        }
+
+        function moveNoButton() {
             var noButton = document.getElementById('no-btn');
             var maxX = window.innerWidth - noButton.clientWidth;
             var maxY = window.innerHeight - noButton.clientHeight;
 
-            var mouseX = event.clientX;
-            var mouseY = event.clientY;
-
-            var newX = Math.max(0, Math.min(maxX, mouseX - noButton.clientWidth / 2));
-            var newY = Math.max(0, Math.min(maxY, mouseY - noButton.clientHeight / 2));
+            var newX = Math.floor(Math.random() * maxX);
+            var newY = Math.floor(Math.random() * maxY);
 
             noButton.style.left = newX + 'px';
             noButton.style.top = newY + 'px';
@@ -68,6 +75,7 @@
             document.getElementById('response-text').style.display = 'block';
             document.getElementById('si-btn').disabled = true;
             document.getElementById('no-btn').disabled = true;
+            stopMoveNoButton();
         }
     </script>
 </body>
