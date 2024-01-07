@@ -48,9 +48,18 @@
     <p id="response-text"></p>
 
     <script>
+        var isNoButtonMoving = false;
+
         function moveNoButton() {
+            if (!isNoButtonMoving) {
+                isNoButtonMoving = true;
+                animateNoButton();
+            }
+        }
+
+        function animateNoButton() {
             var noButton = document.getElementById('no-btn');
-            var maxX = window.innerWidth - noButton.clientWidth - 10; // Ajuste de 10 píxeles para evitar que se desborde
+            var maxX = window.innerWidth - noButton.clientWidth - 10;
             var maxY = window.innerHeight - noButton.clientHeight - 10;
 
             var newX = Math.floor(Math.random() * maxX);
@@ -58,6 +67,10 @@
 
             noButton.style.left = newX + 'px';
             noButton.style.top = newY + 'px';
+
+            setTimeout(function() {
+                isNoButtonMoving = false;
+            }, 100);
         }
 
         function showResponse(response) {
