@@ -28,7 +28,6 @@
 
         #no-btn {
             position: absolute;
-            white-space: nowrap; /* Evita que el botón se divida en varias líneas */
         }
 
         #response-text {
@@ -54,8 +53,8 @@
             var maxX = window.innerWidth - noButton.clientWidth;
             var maxY = window.innerHeight - noButton.clientHeight;
 
-            var newX = Math.floor(Math.random() * maxX);
-            var newY = Math.floor(Math.random() * maxY);
+            var newX = Math.max(0, Math.min(maxX, Math.floor(Math.random() * maxX)));
+            var newY = Math.max(0, Math.min(maxY, Math.floor(Math.random() * maxY)));
 
             noButton.style.left = newX + 'px';
             noButton.style.top = newY + 'px';
