@@ -42,27 +42,28 @@
     
     <div id="button-container">
         <button id="si-btn" onclick="showResponse('Cuando quieras mi chula')">Sí</button>
-        <button id="no-btn" onmousemove="moveNoButton(event)">No</button>
+        <button id="no-btn" onmouseover="moveNoButton()">No</button>
     </div>
 
     <p id="response-text"></p>
 
     <script>
-        function moveNoButton(event) {
+        function moveNoButton() {
             var noButton = document.getElementById('no-btn');
             var maxX = window.innerWidth - noButton.clientWidth;
             var maxY = window.innerHeight - noButton.clientHeight;
 
-            var mouseX = event.clientX;
-            var mouseY = event.clientY;
+            var newX = Math.floor(Math.random() * maxX);
+            var newY = Math.floor(Math.random() * maxY);
 
-            // Ajustamos la posición del botón según la posición del puntero
-            noButton.style.left = (mouseX - noButton.clientWidth / 2) + 'px';
-            noButton.style.top = (mouseY - noButton.clientHeight / 2) + 'px';
+            noButton.style.left = newX + 'px';
+            noButton.style.top = newY + 'px';
 
-            // Aseguramos que el botón no se salga de los límites de la ventana
-            noButton.style.left = Math.max(0, Math.min(maxX, parseInt(noButton.style.left))) + 'px';
-            noButton.style.top = Math.max(0, Math.min(maxY, parseInt(noButton.style.top))) + 'px';
+            // Detener la animación después de un tiempo
+            setTimeout(function() {
+                noButton.style.left = '50%';
+                noButton.style.top = '50%';
+            }, 1000);
         }
 
         function showResponse(response) {
@@ -74,4 +75,5 @@
     </script>
 </body>
 </html>
+
 
