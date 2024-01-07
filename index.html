@@ -42,13 +42,13 @@
     
     <div id="button-container">
         <button id="si-btn" onclick="showResponse('Cuando quieras mi chula')">Sí</button>
-        <button id="no-btn" onmouseover="moveNoButton(event)">No</button>
+        <button id="no-btn" onmouseover="moveNoButton()">No</button>
     </div>
 
     <p id="response-text"></p>
 
     <script>
-        function moveNoButton(event) {
+        function moveNoButton() {
             var noButton = document.getElementById('no-btn');
             var maxX = window.innerWidth - noButton.clientWidth;
             var maxY = window.innerHeight - noButton.clientHeight;
