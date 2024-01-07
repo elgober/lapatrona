@@ -42,32 +42,27 @@
     
     <div id="button-container">
         <button id="si-btn" onclick="showResponse('Cuando quieras mi chula')">Sí</button>
-        <button id="no-btn" onmouseover="startMoveNoButton()" onmouseout="stopMoveNoButton()">No</button>
+        <button id="no-btn" onmousemove="moveNoButton(event)">No</button>
     </div>
 
     <p id="response-text"></p>
 
     <script>
-        var moveNoButtonInterval;
-
-        function startMoveNoButton() {
-            moveNoButtonInterval = setInterval(moveNoButton, 100);
-        }
-
-        function stopMoveNoButton() {
-            clearInterval(moveNoButtonInterval);
-        }
-
-        function moveNoButton() {
+        function moveNoButton(event) {
             var noButton = document.getElementById('no-btn');
             var maxX = window.innerWidth - noButton.clientWidth;
             var maxY = window.innerHeight - noButton.clientHeight;
 
-            var newX = Math.floor(Math.random() * maxX);
-            var newY = Math.floor(Math.random() * maxY);
+            var mouseX = event.clientX;
+            var mouseY = event.clientY;
 
-            noButton.style.left = newX + 'px';
-            noButton.style.top = newY + 'px';
+            // Ajustamos la posición del botón según la posición del puntero
+            noButton.style.left = (mouseX - noButton.clientWidth / 2) + 'px';
+            noButton.style.top = (mouseY - noButton.clientHeight / 2) + 'px';
+
+            // Aseguramos que el botón no se salga de los límites de la ventana
+            noButton.style.left = Math.max(0, Math.min(maxX, parseInt(noButton.style.left))) + 'px';
+            noButton.style.top = Math.max(0, Math.min(maxY, parseInt(noButton.style.top))) + 'px';
         }
 
         function showResponse(response) {
@@ -75,8 +70,8 @@
             document.getElementById('response-text').style.display = 'block';
             document.getElementById('si-btn').disabled = true;
             document.getElementById('no-btn').disabled = true;
-            stopMoveNoButton();
         }
     </script>
 </body>
 </html>
+
