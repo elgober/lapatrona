@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -7,6 +8,8 @@
         body {
             text-align: center;
             padding: 50px;
+            margin: 0;
+            overflow: hidden;
         }
 
         #button-container {
@@ -34,27 +37,22 @@
     
     <div id="button-container">
         <button id="si-btn" onclick="showResponse('Cuando quieras mi chula')">Sí</button>
-        <button id="no-btn" onmouseover="moveNoButton()" onmouseout="stopMoveNoButton()">No</button>
+        <button id="no-btn" onmouseover="moveNoButton(event)">No</button>
     </div>
 
     <p id="response-text"></p>
 
     <script>
-        var noButtonInterval;
+        function moveNoButton(event) {
+            var noButton = document.getElementById('no-btn');
+            var maxX = window.innerWidth - noButton.clientWidth;
+            var maxY = window.innerHeight - noButton.clientHeight;
 
-        function moveNoButton() {
-            noButtonInterval = setInterval(function () {
-                var noButton = document.getElementById('no-btn');
-                noButton.style.transform = 'translate(' + getRandomValue(100) + 'px, ' + getRandomValue(100) + 'px)';
-            }, 100);
-        }
+            var newX = Math.floor(Math.random() * maxX);
+            var newY = Math.floor(Math.random() * maxY);
 
-        function stopMoveNoButton() {
-            clearInterval(noButtonInterval);
-        }
-
-        function getRandomValue(max) {
-            return Math.floor(Math.random() * (max * 2 + 1)) - max;
+            noButton.style.left = newX + 'px';
+            noButton.style.top = newY + 'px';
         }
 
         function showResponse(response) {
