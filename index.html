@@ -42,30 +42,25 @@
     
     <div id="button-container">
         <button id="si-btn" onclick="showResponse('Cuando quieras mi chula')">Sí</button>
-        <button id="no-btn" onmouseover="moveNoButton()" onmouseout="resetNoButton()">No</button>
+        <button id="no-btn" onmousemove="moveNoButton(event)">No</button>
     </div>
 
     <p id="response-text"></p>
 
     <script>
-        var noButtonInterval;
+        function moveNoButton(event) {
+            var noButton = document.getElementById('no-btn');
+            var maxX = window.innerWidth - noButton.clientWidth;
+            var maxY = window.innerHeight - noButton.clientHeight;
 
-        function moveNoButton() {
-            noButtonInterval = setInterval(function() {
-                var noButton = document.getElementById('no-btn');
-                var maxX = window.innerWidth - noButton.clientWidth;
-                var maxY = window.innerHeight - noButton.clientHeight;
+            var mouseX = event.clientX;
+            var mouseY = event.clientY;
 
-                var newX = Math.floor(Math.random() * maxX);
-                var newY = Math.floor(Math.random() * maxY);
+            var newX = Math.max(0, Math.min(maxX, mouseX - noButton.clientWidth / 2));
+            var newY = Math.max(0, Math.min(maxY, mouseY - noButton.clientHeight / 2));
 
-                noButton.style.left = newX + 'px';
-                noButton.style.top = newY + 'px';
-            }, 100);
-        }
-
-        function resetNoButton() {
-            clearInterval(noButtonInterval);
+            noButton.style.left = newX + 'px';
+            noButton.style.top = newY + 'px';
         }
 
         function showResponse(response) {
@@ -73,7 +68,6 @@
             document.getElementById('response-text').style.display = 'block';
             document.getElementById('si-btn').disabled = true;
             document.getElementById('no-btn').disabled = true;
-            resetNoButton(); // Detener la animación cuando se muestra la respuesta
         }
     </script>
 </body>
