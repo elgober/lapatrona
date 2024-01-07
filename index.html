@@ -28,6 +28,7 @@
 
         #no-btn {
             position: absolute;
+            white-space: nowrap; /* Evita que el botón se divida en varias líneas */
         }
 
         #response-text {
@@ -48,29 +49,16 @@
     <p id="response-text"></p>
 
     <script>
-        var isNoButtonMoving = false;
-
         function moveNoButton() {
-            if (!isNoButtonMoving) {
-                isNoButtonMoving = true;
-                animateNoButton();
-            }
-        }
-
-        function animateNoButton() {
             var noButton = document.getElementById('no-btn');
-            var maxX = window.innerWidth - noButton.clientWidth - 10;
-            var maxY = window.innerHeight - noButton.clientHeight - 10;
+            var maxX = window.innerWidth - noButton.clientWidth;
+            var maxY = window.innerHeight - noButton.clientHeight;
 
             var newX = Math.floor(Math.random() * maxX);
             var newY = Math.floor(Math.random() * maxY);
 
             noButton.style.left = newX + 'px';
             noButton.style.top = newY + 'px';
-
-            setTimeout(function() {
-                isNoButtonMoving = false;
-            }, 100);
         }
 
         function showResponse(response) {
