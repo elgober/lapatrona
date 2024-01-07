@@ -12,10 +12,8 @@
             overflow: hidden;
         }
 
-        h1 {
-            font-size: 0; /* Establece el tamaño del texto del título en cero para que no sea visible */
-            margin: 0;
-            padding: 0;
+        h1.title {
+            visibility: hidden;
         }
 
         #button-container {
@@ -39,8 +37,8 @@
     </style>
 </head>
 <body>
-    <h1>La Patrona</h1>
-    <h1 style="font-size: 1.5em;">Nos vamos a volver a ver?</h1>
+    <h1 class="title">La Patrona</h1>
+    <h1>Nos vamos a volver a ver?</h1>
     
     <div id="button-container">
         <button id="si-btn" onclick="showResponse('Cuando quieras mi chula')">Sí</button>
