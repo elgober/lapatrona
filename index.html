@@ -27,7 +27,7 @@
         }
 
         #no-btn {
-            position: fixed;
+            position: absolute;
         }
 
         #response-text {
@@ -50,8 +50,8 @@
     <script>
         function moveNoButton() {
             var noButton = document.getElementById('no-btn');
-            var maxX = window.innerWidth - noButton.clientWidth;
-            var maxY = window.innerHeight - noButton.clientHeight;
+            var maxX = window.innerWidth - noButton.clientWidth - 10; // Ajuste de 10 píxeles para evitar que se desborde
+            var maxY = window.innerHeight - noButton.clientHeight - 10;
 
             var newX = Math.floor(Math.random() * maxX);
             var newY = Math.floor(Math.random() * maxY);
